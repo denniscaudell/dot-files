@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+source ~/Scripts/dwm/dwm_pango_defs
+
+getInfoString()
+{
+    local ADP_STATUS="$(getADPStatus /sys/class/power_supply/ADP1)"
+    local BAT_STATUS="$(getBatteryStatus /sys/class/power_supply/BAT1)"
+    local VOL_STATUS="$(getVolumeStatus)"
+    local WF0_STATUS="${SIGN_WIFI}$(getConnectionStatus wlp1s0)"
+    local ET0_STATUS="${SIGN_NET}$(getConnectionStatus enp2s0)"
+    local BT0_STATUS="${SIGN_BLTT}$(getBluetoothStatus /sys/bus/platform/devices/samsung/rfkill/rfkill1)"
+    local BKL_STATUS="$(getBacklightStatus)"
+    echo -n -e " $(date) "
+    echo -n -e "$(addSectionL " ${ADP_STATUS} ${SEP_L_LINE} ${BAT_STATUS} ")"
+    echo -n -e "$(addSectionL " ${BT0_STATUS} ${SEP_L_LINE} ${WF0_STATUS} ${SEP_L_LINE} ${ET0_STATUS} ")"
+    echo -n -e "$(addSectionL " ${BKL_STATUS} ${SEP_L_LINE} ${VOL_STATUS} ")"
+}
+

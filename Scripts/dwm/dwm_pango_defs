@@ -1,0 +1,144 @@
+#!/usr/bin/bash
+
+source ~/Scripts/dwm/dwm_common_defs
+
+getVolumeStatus()
+{
+    local __level="$(pacmd list-sinks|grep -A 15 '* index' | grep 'volume: front' | sed "s|^.*/[ ]*\([1234567890]*\)%[ ]*/.*|\1|g")"
+    
+    local __muted="$(pacmd list-sinks|grep -A 15 '* index' | grep 'muted: ' | sed -e "s/^.*:[ ]*\(.*\)[ ]*$/\1/g")"
+    
+    if [[ "x$__muted" == "xyes" ]]; then
+        local _vol_bar="\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581"
+	local __level="x"
+    elif [[ "$__level" -le "11" ]]; then
+        local _vol_bar="\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581\u2581"
+    elif [[ "$__level" -le "22" ]]; then	    
+        local _vol_bar="\u2581\u2582\u2581\u2581\u2581\u2581\u2581\u2581\u2581" 
+    elif [[ "$__level" -le "33" ]]; then
+        local _vol_bar="\u2581\u2582\u2583\u2581\u2581\u2581\u2581\u2581\u2581"
+    elif [[ "$__level" -le "44" ]]; then
+        local _vol_bar="\u2581\u2582\u2583\u2584\u2581\u2581\u2581\u2581\u2581"
+    elif [[ "$__level" -le "55" ]]; then
+        local _vol_bar="\u2581\u2582\u2583\u2584\u2585\u2581\u2581\u2581\u2581"
+    elif [[ "$__level" -le "66" ]]; then
+        local _vol_bar="\u2581\u2582\u2583\u2584\u2585\u2586\u2581\u2581\u2581"
+    elif [[ "$__level" -le "77" ]]; then
+        local _vol_bar="\u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2581\u2581"
+    elif [[ "$__level" -le "95" ]]; then
+        local _vol_bar="\u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2588\u2581"
+    else
+        local _vol_bar="\u2581\u2582\u2583\u2584\u2585\u2586\u2587\u2588\u258C"
+    fi
+
+    echo -e "${SIGN_SPKR}$__level% $_vol_bar"
+}
+
+getBacklightStatus()
+{
+    __bl_val="$(xbacklight -get)"
+    __bl_flt="$(LC_ALL=C printf '%0.2f' $__bl_val)"
+    __level=${__bl_val%.*}
+
+    if [[ "$__level" -le "10" ]]; then
+        local _bkl_bar="\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591"
+    elif [[ "$__level" -le "20" ]]; then	    
+        local _bkl_bar="\u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591" 
+    elif [[ "$__level" -le "30" ]]; then
+        local _bkl_bar="\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591"
+    elif [[ "$__level" -le "40" ]]; then
+        local _bkl_bar="\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591"
+    elif [[ "$__level" -le "50" ]]; then
+        local _bkl_bar="\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591"
+    elif [[ "$__level" -le "60" ]]; then
+        local _bkl_bar="\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591"
+    elif [[ "$__level" -le "70" ]]; then
+        local _bkl_bar="\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591"
+    elif [[ "$__level" -le "80" ]]; then
+        local _bkl_bar="\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591"
+    elif [[ "$__level" -le "90" ]]; then
+        local _bkl_bar="\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591"
+    else
+        local _bkl_bar="\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588"
+    fi
+
+    echo -e "${SIGN_DSPL}$__bl_flt% $_bkl_bar"
+}
+
+
+getADPStatus()
+{
+    if [ -f $1/online ]; then
+        if [[ "x$(cat $1/online)" == "x1"  ]]; then
+            local _status="→"
+        else
+            local _status="\u2715"
+        fi
+    else
+        local _status="\u2757"
+    fi
+
+    echo "\u26A1${_status}"
+}
+
+getBatteryStatus()
+{
+    if [ -f $1/status ]; then
+        local __bat_status="$(cat $1/status)"
+        if [[ "x${__bat_status}" == "xCharging" ]]; then
+            local __status="↑"
+        elif [[ "x${__bat_status}" == "xDischarging" ]]; then
+            local __status="↓"
+        elif [[ "x${__bat_status}" == "xFull" ]]; then
+            local __status=" "
+        else
+            local __status="?"
+        fi
+    else
+        local __status="\u2757"
+    fi
+    
+    local _max="$(cat $1/charge_full)"
+    local _cur="$(cat $1/charge_now)"
+    local _perc="$((100 * $_cur / $_max))"
+    
+    echo "${__status}${SIGN_BATT}${_perc}%"
+}
+
+getConnectionStatus()
+{
+    if [[ "x$(ip addr show $1 | grep inet)" == "x" ]]; then
+        local __connection_status="x"
+    else
+	local __connection_status="\u2714"
+    fi
+    
+    echo "${__connection_status}"
+}
+
+getBluetoothStatus()
+{
+    bt_state="$(cat $1/state)"
+    if [[ "x${bt_state}" == "x0" ]]; then
+        local __bt_status="x"
+    elif [[ "x${bt_state}" == "x1" ]]; then
+	local __bt_status="\u2714"
+    else
+	local __bt_status="?"
+    fi
+    
+    echo "${__bt_status}"
+}
+
+addSectionL()
+{
+    echo "${SEP_L_FLAT}$1"
+    #echo -e "<span fgcolor='$3' bgcolor='$4'>${SEP_L_FLAT}</span><span fgcolor='$2' bgcolor='$3'>$1</span>"
+}
+
+addSectionR()
+{
+    echo -e "$1${SEP_R_FLAT}"
+    #echo -e "<span fgcolor='$2' bgcolor='$3'>$1</span><span fgcolor='$3' bgcolor='$4'>${SEP_R_FLAT}</span>"
+}
+

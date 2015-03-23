@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# by apg - https://bbs.archlinux.org/viewtopic.php?pid=1503945#p1503945
+#
+
+for pkg in $(pacman -Qqd); do [[ -z $(comm -12 <(pactree -r $pkg -u | sort) <(pacman -Qqe | sort)) ]] && echo $pkg; done

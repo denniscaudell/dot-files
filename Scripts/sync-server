@@ -1,0 +1,3 @@
+AUR_DIR="${HOME}/Documents/informatica/AUR/"
+
+rsync -a --progress -e 'ssh -p50000' --progress "${AUR_DIR}/personal/" daddona@192.168.0.101:"${AUR_DIR}/personal"

@@ -1,0 +1,30 @@
+"xbacklight -inc 1"
+  XF86MonBrightnessUp+Shift
+"xbacklight -inc 10"
+  XF86MonBrightnessUp
+"xbacklight -dec 1"
+  XF86MonBrightnessDown+Shift
+"xbacklight -dec 10"
+  XF86MonBrightnessDown
+"pulseaudio-ctl mute"
+  XF86AudioMute
+"pulseaudio-ctl down"
+  XF86AudioLowerVolume
+"pulseaudio-ctl up"
+  XF86AudioRaiseVolume
+"samsung-tools --quiet --bluetooth toggle"
+  XF86Launch1
+"samsung-tools --quiet --cpu cycle"
+  XF86Launch3
+"samsung-tools --quiet --wireless toggle"
+  XF86WLAN
+"samsung-tools --quiet --backlight toggle"
+  XF86Display
+"systemctl suspend"
+  XF86PowerOff
+"systemctl poweroff"
+  Control+XF86PowerOff
+"systemctl reboot"
+  Control+Alt+XF86PowerOff
+"SamsungToolsDummyCommand"
+  Control+Alt+Shift+Mod4+F1+F2+F3

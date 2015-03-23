@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+_BLK="\u2588"
+
+printStripe() {
+  if [ $1 == 1 ]; then
+    bold="bold"
+  else
+    bold="norm"
+  fi 
+  
+  echo -en "${bold} $2-$3\t"
+  for i in $(seq $2 $3); do
+    echo -en "\e[${1}\e[38;5;${i}m${_BLK}${_BLK}${_BLK}\e[0m"
+  done
+  echo ""
+}
+
+printStripe 0 0 8
+printStripe 1 0 8
+printStripe 0 8 15
+printStripe 1 8 15
+

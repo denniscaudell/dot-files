@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# ~/.xprofile
+
+echo "[xprofile] setting keyboarm map..." >> ~/.xsession-errors
+/usr/bin/setxbmap it
+/usr/bin/xbindkeys
+echo "[xprofile] loading xresources..." >> ~/.xsession-errors
+/usr/bin/xrdb ~/.xresources
+
+#Set deafult browser
+if [ -n "$DISPLAY" ]; then
+    export BROWSER=firefox
+    echo "[xprofile] starting pulseaudio..." >> ~/.xsession-errors
+    /usr/bin/pulseaudio &>> ~/.xsession-errors &
+    echo "[xprofile] starting ibus-daemon..." >> ~/.xsession-errors
+    /usr/bin/ibus-daemon --xim --daemonize --replace &>> ~/.xsession-errors &
+fi
+
+# x releated variables
+export SDL_AUDIODRIVER=alsa
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+
+echo "[xprofile] loading complete" >> ~/.xsession-errors
+

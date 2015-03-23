@@ -1,0 +1,21 @@
+--- dwm-orig/dwm.c	2015-03-05 11:01:11.239302664 +0100
++++ dwm-dest/dwm.c	2015-03-05 10:48:20.101988699 +0100
+@@ -1834,12 +1834,16 @@
+ updatebarpos(Monitor *m) {
+ 	m->wy = m->my;
+ 	m->wh = m->mh;
+ 	if(m->showbar) {
+-		m->wh -= bh;
+-		m->by = m->topbar ? m->wy : m->wy + m->wh;
++		m->wh -= bh + GAP_TOP + GAP_BOTTOM;
++		m->by = m->topbar ? m->wy : m->wy + m->mh - bh;
+ 		m->wy = m->topbar ? m->wy + bh : m->wy;
+ 	}
+ 	else
++	{
+ 		m->by = -bh;
++		m->wh -= GAP_BOTTOM + GAP_TOP;
++	}
++	m->wy += GAP_TOP;
+ }
+
