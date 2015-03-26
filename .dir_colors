@@ -42,13 +42,19 @@ STICKY 01;37;44 # dir with the sticky bit set (+t) and not other-writable
 .nef 01;35
 .fits 01;35
 .svg 01;35
+# video formats
+.avi 38;5;081
+.mp4 38;5;081
+.mpg 38;5;081
+.mpeg 38;5;081
+.flv 38;5;081
 # audio formats
-.aac 00;36
-.flac 00;36
-.ogg 00;36
-.mp3 00;36
-.wav 00;36
-.amr 00;36
+.aac 38;5;75
+.flac 38;5;75
+.ogg 38;5;75
+.mp3 38;5;75
+.wav 38;5;75
+.amr 38;5;75
 # dowloads
 .part 03;32
 .aria2 03;32
