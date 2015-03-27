@@ -7,6 +7,7 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='badwolf'
 set number
 set laststatus=2
+set mouse=a
 
 set tabstop=2
 set shiftwidth=2
