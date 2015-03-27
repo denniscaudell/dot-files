@@ -41,4 +41,4 @@ case "$1" in
 esac
 
 echo ""
-ssh -Y -p50000 daddona@192.168.0.101
+ssh -Y daddona@192.168.0.101
