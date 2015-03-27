@@ -19,11 +19,6 @@ export EDITOR=nano
 export PULSE_LATENCY_MSEC=30
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-export CCACHE_DIR="/mnt/CACHE/CCACHE"
-export CHROOT="/mnt/CACHE/CHROOT"
-export ABSROOT="/mnt/CACHE/ABS"
-export PATH="~/Scripts:${PATH}"
-
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \

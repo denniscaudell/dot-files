@@ -10,8 +10,12 @@
   XF86AudioMute
 "pulseaudio-ctl down"
   XF86AudioLowerVolume
+"pulseaudio-ctl down"
+  Shift+Down
 "pulseaudio-ctl up"
   XF86AudioRaiseVolume
+"pulseaudio-ctl up"
+  Shift+Up
 "samsung-tools --quiet --bluetooth toggle"
   XF86Launch1
 "samsung-tools --quiet --cpu cycle"
@@ -20,6 +24,8 @@
   XF86WLAN
 "samsung-tools --quiet --backlight toggle"
   XF86Display
+"systemctl suspend"
+  XF86Suspend
 "systemctl suspend"
   XF86PowerOff
 "systemctl poweroff"
