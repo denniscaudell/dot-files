@@ -27,7 +27,18 @@ man() {
     LESS_TERMCAP_so=$'\E[38;5;246m' \
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
-    man "$@"
+    /usr/bin/man "$@"
+}
+
+virtualbox() {
+  if $(modprobe vboxdrv); then 
+    echo "running virtualbox"
+    /usr/bin/virtualbox
+  else
+    echo "inserting vboxdrv"
+    /usr/bin/gksu modprobe vboxdrv
+    /usr/bin/virtualbox
+  fi
 }
 
 alias ls='ls -l --color=auto --group-directories-first'
