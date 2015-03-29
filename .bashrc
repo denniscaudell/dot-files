@@ -37,6 +37,7 @@ virtualbox() {
   else
     echo "inserting vboxdrv"
     /usr/bin/gksu modprobe vboxdrv
+    echo "running virtualbox"
     /usr/bin/virtualbox
   fi
 }
