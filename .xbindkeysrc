@@ -16,13 +16,13 @@
   XF86AudioRaiseVolume
 "pulseaudio-ctl up"
   Shift+Up
-"samsung-tools --quiet --bluetooth toggle"
+"samsung-tools --show-notify --bluetooth toggle"
   XF86Launch1
-"samsung-tools --quiet --cpu cycle"
+"samsung-tools --show-notify --cpu cycle"
   XF86Launch3
-"samsung-tools --quiet --wireless toggle"
+"samsung-tools --show-notify --wireless toggle"
   XF86WLAN
-"samsung-tools --quiet --backlight toggle"
+"samsung-tools --show-notify --backlight toggle"
   XF86Display
 "systemctl suspend"
   XF86Suspend

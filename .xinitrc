@@ -26,15 +26,14 @@ else
     case "$2" in
         dwm)
             [[ -f ~/.xprofile ]] && source ~/.xprofile
-	    /usr/bin/xcompmgr &>> ~/.xsession-errors &
-            /usr/bin/urxvt &
+            /usr/bin/-config ~/.dunstrc  &>> ~/.xsession-errors &
 
             exec ~/Scripts/startdwm &>> ~/.xsession-errors
             ;;
         kde)
             #exec /usr/bin/startkde &>> ~/.xsession-errors
-	    echo "KDE support temporary removed!"
-	    echo "back to the console..."
+            echo "KDE support temporary removed!"
+            echo "back to the console..."
             ;;
     esac
 fi
