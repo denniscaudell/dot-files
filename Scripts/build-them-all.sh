@@ -22,11 +22,11 @@ logmsg "buildbot - $(date -u) - building summary"
 logmsg "Building packages from '${PKGDIR}'"
 
 logmsg "Updating dot-files from git repo"
-cd "${HOME}" && git pull origin master &> /dev/null 
+cd "${HOME}" && timeout 10 git pull origin master &> /dev/null 
 [[ "$?" -eq 0  ]] || echo "Warning: cannot update dot-files"
 
 logmsg "Updating AUR packages from git repo"
-cd "${PKGDIR}" && git pull origin master &> /dev/null 
+cd "${PKGDIR}" && timeout 10 git pull origin master &> /dev/null 
 [[ "$?" -eq 0  ]] || echo "Warning: cannot update AUR packages"
 
 "${PKGDIR}/ccm_test.sh" all 64
