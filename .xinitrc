@@ -26,8 +26,6 @@ else
     case "$2" in
         dwm)
             [[ -f ~/.xprofile ]] && source ~/.xprofile
-            /usr/bin/-config ~/.dunstrc  &>> ~/.xsession-errors &
-
             exec ~/Scripts/startdwm &>> ~/.xsession-errors
             ;;
         kde)
