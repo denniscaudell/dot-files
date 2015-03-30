@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-if [[ "$(whoami)" -ne "buildbot" ]]; then
+if [[ "$(whoami)" != "buildbot" ]]; then
   echo "This script must be run by buildbot"
   exit 1
 fi
