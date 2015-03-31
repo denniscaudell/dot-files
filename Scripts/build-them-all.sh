@@ -16,9 +16,7 @@ export LC_ALL=C
 
 notifyall()
 {
-  for user in "$(who | awk '{print $1}')"; do
-    sudo -u "$user" notify-send -u normal "$NOTIFY_HEADER" "$*"
-  done
+  sudo -u daddona DISPLAY=":0" notify-send -u normal "$NOTIFY_HEADER" "$*"
 
   wall "$*"
 }
