@@ -70,6 +70,6 @@ if [[ "$(who | wc -l)" -eq 0 ]]; then
   # well, there is nobody logged-in :(
   # let's shutdown the machine then ;)
   logmsg "No user connected, shutting down..."
-  shutdown now
+  sudo /usr/bin/shutdown now
 fi
 
