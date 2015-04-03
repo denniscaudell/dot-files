@@ -36,7 +36,7 @@ case "$1" in
 		;;
 	*)
     		echo "Waiting for Server to Boot: "
-		countdown "00:00:40"
+		countdown "00:00:25"
 		;;
 esac
 
