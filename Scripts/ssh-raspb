@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+PI_IP="$(awk < /var/lib/misc/dnsmasq.leases ' $4 == "alarmpi" {print $3}')"
+
+ssh ${1}@${PI_IP}
