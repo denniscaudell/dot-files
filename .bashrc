@@ -42,7 +42,7 @@ virtualbox() {
   fi
 }
 
-alias ls='ls -l --color=auto --group-directories-first'
+alias ls='ls -l -h --color=auto --group-directories-first'
 alias mountu2='udisksctl mount -b'
 alias umountu2='udisksctl unmount -b'
 alias mountu2-iso='udisksctl loop-setup -r -f'
