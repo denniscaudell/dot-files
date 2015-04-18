@@ -42,6 +42,7 @@ STICKY 01;37;44 # dir with the sticky bit set (+t) and not other-writable
 .nef 01;35
 .fits 01;35
 .svg 01;35
+.svgz 01;35
 # video formats
 .avi 38;5;081
 .mp4 38;5;081
