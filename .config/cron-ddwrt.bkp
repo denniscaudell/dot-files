@@ -1,0 +1,1 @@
+14 15 * * 0 root /usr/sbin/wol -p 4000 -i 192.168.0.255 F4:6D:04:AE:FA:1F
