@@ -119,7 +119,7 @@ getConnectionStatus()
 
 getBluetoothStatus()
 {
-    if [[ -e "$1" ]]: then
+    if [[ -e "$1" ]]; then
         bt_state="$(cat $1/state)"
         if [[ "x${bt_state}" == "x0" ]]; then
             local __bt_status="x"
