@@ -94,14 +94,15 @@ getBatteryStatus()
         else
             local __status="?"
         fi
+
+        local _max="$(cat $1/charge_full)"
+        local _cur="$(cat $1/charge_now)"
+        local _perc="$((100 * $_cur / $_max))"
     else
         local __status="\u2757"
+        local _perc="--"
     fi
-    
-    local _max="$(cat $1/charge_full)"
-    local _cur="$(cat $1/charge_now)"
-    local _perc="$((100 * $_cur / $_max))"
-    
+
     echo "${__status}${SIGN_BATT}${_perc}%"
 }
 
@@ -110,7 +111,7 @@ getConnectionStatus()
     if [[ "x$(ip addr show $1 | grep inet)" == "x" ]]; then
         local __connection_status="x"
     else
-	local __connection_status="\u2714"
+      	local __connection_status="\u2714"
     fi
     
     echo "${__connection_status}"
@@ -118,15 +119,19 @@ getConnectionStatus()
 
 getBluetoothStatus()
 {
-    bt_state="$(cat $1/state)"
-    if [[ "x${bt_state}" == "x0" ]]; then
-        local __bt_status="x"
-    elif [[ "x${bt_state}" == "x1" ]]; then
-	local __bt_status="\u2714"
+    if [[ -e "$1" ]]: then
+        bt_state="$(cat $1/state)"
+        if [[ "x${bt_state}" == "x0" ]]; then
+            local __bt_status="x"
+        elif [[ "x${bt_state}" == "x1" ]]; then
+    	      local __bt_status="\u2714"
+        else
+    	      local __bt_status="?"
+        fi
     else
-	local __bt_status="?"
+        local __bt_status="--"
     fi
-    
+
     echo "${__bt_status}"
 }
 
