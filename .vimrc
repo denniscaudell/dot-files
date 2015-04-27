@@ -25,6 +25,8 @@ autocmd vimenter * MBEOpen
 autocmd vimenter * TlistOpen
 
 map <C-n> :NERDTreeToggle<CR>
+map <C-l> :set background=light<CR>
+map <C-d> :set background=dark<CR>
 
 let g:project_use_nerdtree = 1
 

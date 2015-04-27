@@ -11,6 +11,10 @@ else
     PS1='[\u@\h \W]\$ '
 fi
 
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+shopt -s histappend
+
 complete -cf kdesu
 
 export VISUAL=vim
@@ -31,7 +35,7 @@ man() {
 }
 
 virtualbox() {
-  if $(modprobe vboxdrv); then 
+  if $(modprobe vboxdrv); then
     echo "running virtualbox"
     /usr/bin/virtualbox
   else
