@@ -11,6 +11,10 @@ else
     PS1='[\u@\h \W]\$ '
 fi
 
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+shopt -s histappend
+
 complete -cf kdesu
 
 export VISUAL=vim
@@ -31,7 +35,7 @@ man() {
 }
 
 virtualbox() {
-  if $(modprobe vboxdrv); then 
+  if $(modprobe vboxdrv); then
     echo "running virtualbox"
     /usr/bin/virtualbox
   else
@@ -49,7 +53,10 @@ alias mountu2-iso='udisksctl loop-setup -r -f'
 alias umountu2-iso='udisksctl loop-delete -b'
 alias ccm64='sudo ccm64'
 alias ccm32='sudo ccm32'
+alias nspawna='sudo arch-nspawn'
+alias nspawnd='sudo systemd-nspawn'
 alias less='less -R'
+alias pdfview='apvlv'
 
 eval $(dircolors -b "${HOME}/.dir_colors")
 
