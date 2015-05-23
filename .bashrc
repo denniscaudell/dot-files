@@ -46,6 +46,10 @@ virtualbox() {
   fi
 }
 
+# pacman() {
+#   echo "No fun for tday, sorry..."
+# }
+
 alias ls='ls -l -h --color=auto --group-directories-first'
 alias mountu2='udisksctl mount -b'
 alias umountu2='udisksctl unmount -b'
