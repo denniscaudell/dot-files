@@ -47,7 +47,7 @@ virtualbox() {
 }
 
 # pacman() {
-#   echo "No fun for tday, sorry..."
+#   echo "No fun for today, sorry..."
 # }
 
 alias ls='ls -l -h --color=auto --group-directories-first'

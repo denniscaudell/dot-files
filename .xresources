@@ -77,6 +77,7 @@ XTerm*locale: true
 *faceNameDoublesize: KanjiStrokeOrders
 *faceSize: 8
 
+URxvt*skipBuiltinGlyphs: true
 URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=8,\
             xft:KanjiStrokeOrders,\
             -*-xbmicons-medium-r-*-*-*-*-*-*-*-*-*-*
