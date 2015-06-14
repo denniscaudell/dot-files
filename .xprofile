@@ -11,8 +11,6 @@ echo "[xprofile] loading xresources..." >> ~/.xsession-errors
 #Set deafult browser
 if [ -n "$DISPLAY" ]; then
     export BROWSER=firefox
-    echo "[xprofile] starting pulseaudio..." >> ~/.xsession-errors
-    /usr/bin/pulseaudio &>> ~/.xsession-errors &
     echo "[xprofile] starting ibus-daemon..." >> ~/.xsession-errors
     /usr/bin/ibus-daemon --xim --daemonize --replace &>> ~/.xsession-errors &
 fi
