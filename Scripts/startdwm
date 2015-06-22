@@ -10,6 +10,4 @@ echo "[startdwm] starting dzen2 statusbar..."
 ~/Scripts/dzen/dzenbar &
 
 echo "[startdwm] starting dwm..."
-while true; do
-  dwm
-done
+exec dwm
