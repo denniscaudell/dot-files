@@ -1,41 +1,45 @@
-# Conky, a system monitor, based on torsmo
-#
-# Any original torsmo code is licensed under the BSD license
-#
-# All code written since the fork of torsmo is licensed under the GPL
-#
-# Please see COPYING for details
-#
-# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
-# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
-# All rights reserved.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+-- vim: ts=4 sw=4 noet ai cindent syntax=lua
+--[[
+Conky, a system monitor, based on torsmo
 
-background no
-out_to_console yes
-out_to_x no
-cpu_avg_samples 2 
-net_avg_samples 2
-no_buffers yes
-out_to_stderr no
-update_interval 5.0
-uppercase no
-use_spacer none
-if_up_strictness address
+Any original torsmo code is licensed under the BSD license
 
-TEXT
+All code written since the fork of torsmo is licensed under the GPL
+
+Please see COPYING for details
+
+Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+]]
+
+conky.config = {
+  background = false,
+  out_to_console = true,
+  out_to_x = false,
+  cpu_avg_samples = 2,
+  net_avg_samples = 2,
+  no_buffers = true,
+  out_to_stderr = false,
+  update_interval = 5.0,
+  uppercase = false,
+  use_spacer = 'none',
+  if_up_strictness = 'address'
+}
+
+conky.text = [[
 ^ca(1, ~/Scripts/dzen/sysinfo-popup.sh)\
 ^fg(\#000000)\
 ^bg(\#00AFFF)\
@@ -115,3 +119,4 @@ ${endif}\
 ${endif}\
                                                              \
                                                              \
+]]
