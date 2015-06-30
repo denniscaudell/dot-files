@@ -57,6 +57,7 @@ alias nspawna='sudo arch-nspawn'
 alias nspawnd='sudo systemd-nspawn'
 alias less='less -R'
 alias pdfview='apvlv'
+alias alsaequal='alsamixer -D equal'
 
 eval $(dircolors -b "${HOME}/.dir_colors")
 
