@@ -19,15 +19,15 @@ notifyall()
   sudo -u daddona DISPLAY=":0" notify-send -u normal "$NOTIFY_HEADER" "$*"
 
   wall "$*"
+
+  #posting on the home server board
+  /usr/bin/python ${HOME}/Scripts/bbsBotMessage "$*"
 }
 
 
 logmsg()
 {
   echo "$@" | tee -a "$SUMMARY"
-
-  #posting on the home server board
-  bbsBotMessage "$@"
 }
 
 notifyall "I'm starting the weekly building check for the AUR packages."\
