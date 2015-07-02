@@ -266,6 +266,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     msg = ' '.join(args.message)
+    msg = msg.replace("'", "''").replace('"','""')
     con = FluxBBBotConnector()
 
     con.readConfig(os.path.join(os.path.expanduser("~"),
