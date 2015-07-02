@@ -1,0 +1,279 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import time
+import argparse
+import configparser
+import mysql.connector
+from mysql.connector import errorcode
+
+
+class FluxBBBotConnector(object):
+
+    INSERT_POST = (
+        "INSERT INTO posts " +
+        "(id, poster, poster_id, message, posted, topic_id)" +
+        " VALUES " +
+        "({0}, '{1}', {2}, '{3}', '{4}', {5} )"
+    )
+    INSERT_FORUM = (
+        "INSERT INTO forums " +
+        "(id, forum_name, forum_desc, cat_id)" +
+        " VALUES " +
+        "({0}, '{1}', '{2}', {3})"
+    )
+    INSERT_TOPIC = (
+        "INSERT INTO topics " +
+        "(id, poster, subject, sticky, forum_id)" +
+        " VALUES " +
+        "({0}, '{1}', '{2}', {3}, {4})"
+    )
+    INSERT_USER = (
+        "INSERT INTO users " +
+        "(id, group_id, username, password, registered, title)" +
+        " VALUES " +
+        "({0}, {1}, '{2}', '{3}', {4}, '{5}')"
+    )
+
+    QUERY_CATEGORIES = "SELECT id, cat_name FROM categories"
+    QUERY_FORUMS = "SELECT id, forum_name, forum_desc, cat_id FROM forums"
+    QUERY_TOPICS = "SELECT id,poster,subject,forum_id FROM topics"
+    QUERY_USERS = "SELECT id,group_id,username FROM users"
+
+    UPDATE_TOPIC = ("UPDATE topics SET " +
+                    "last_post='{1}', last_post_id={2}, last_poster='{3}'" +
+                    " WHERE "
+                    "id = {0}")
+
+    def __init__(self):
+        self.config = {}
+        self.conn = None
+        self.user_id = None
+        self.category = "Administration"
+        self.cat_id = None
+        self.forum = "News"
+        self.forum_id = None
+        self.forum_desc = "News and messages from aministration"
+        self.topic = "AUR packages building log"
+        self.topic_id = None
+
+    def _checkCategory(self, category):
+        if category['cat_name'] == self.category:
+            return category['id']
+
+    def _checkForum(self, forum):
+        if forum['forum_name'] == self.forum:
+            return forum['id']
+
+    def _checkTopic(self, topic):
+        if topic['subject'] == self.topic:
+            return topic['id']
+
+    def _checkUserName(self, user):
+        if user['username'] == self.config['user']:
+            return user['id']
+
+    def open(self, config=None):
+
+        if config is not None:
+            cfg = config
+        else:
+            cfg = self.config
+
+        try:
+            self.conn = mysql.connector.connect(**cfg)
+
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Something is wrong with your user name or password")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("Database does not exist")
+            else:
+                print(err)
+            self.conn = None
+            return False
+        else:
+            self.config = cfg
+
+            self.user_id = self.checkUser()
+            if not self.user_id:
+                print("User '"+self.config['user']+"' does not exis:" +
+                      " creating new one.")
+                self.user_id = self.makeUser()
+            else:
+                print("User '"+self.config['user']+"' exists.")
+
+            self.cat_id = self.checkCategory()
+
+            if not self.cat_id:
+                print("Category '"+self.category+"' does not exist:" +
+                      " cannot procede, goodbye!")
+                self.conn.close()
+                sys.exit(1)
+
+            self.forum_id = self.checkForum()
+
+            if not self.forum_id:
+                print("Forum '"+self.forum+"' does not exist" +
+                      " creating new one.")
+                self.forum_id = self.makeForum()
+            else:
+                print("Forum '"+self.forum+"' exists.")
+
+            self.topic_id = self.checkTopic()
+
+            if not self.topic_id:
+                print("Topic '"+self.topic+"' does not exist" +
+                      " creating new one.")
+                self.topic_id = self.makeTopic()
+                con.makePost("Hello world!\n" +
+                             "I''m buildbot, and will post here the resuilt " +
+                             "of your AUR package weekly building check!")
+            else:
+                print("Topic '"+self.topic+"' exists.")
+
+            return True
+
+    def close(self):
+        if self.conn is not None:
+            self.conn.close()
+
+    def dbQuery(self, query):
+        cursor = self.conn.cursor()
+        cursor.execute(query)
+        res = []
+        for entry in cursor:
+            res.append(entry)
+        cursor.close()
+        return res
+
+    def dbQueryIterate(self, query, callback):
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(query)
+        res = None
+        for entry in cursor:
+            res = callback(entry)
+            if res:
+                break
+        cursor.close()
+        return res
+
+    def dbEdit(self, fmt_str):
+        cursor = self.conn.cursor(dictionary=True)
+        cursor.execute(fmt_str)
+        cursor.close()
+
+    def checkCategory(self):
+        return self.dbQueryIterate(self.QUERY_CATEGORIES, self._checkCategory)
+
+    def checkForum(self):
+        return self.dbQueryIterate(self.QUERY_FORUMS, self._checkForum)
+
+    def checkTopic(self):
+        return self.dbQueryIterate(self.QUERY_TOPICS, self._checkTopic)
+
+    def checkUser(self):
+        return self.dbQueryIterate(self.QUERY_USERS, self._checkUserName)
+
+    def makeForum(self):
+        fmt_str = self.INSERT_FORUM.format(
+            0,
+            self.forum,
+            self.forum_desc,
+            self.cat_id)
+        self.dbEdit(fmt_str)
+        fid = self.checkForum()
+        if fid:
+            print("Forum '"+self.forum+"' created succesfully!")
+            return fid
+        else:
+            sys.exit(1)
+
+    def makeTopic(self):
+        fmt_str = self.INSERT_TOPIC.format(
+            0,
+            self.config['user'],
+            self.topic,
+            1,
+            self.forum_id)
+        self.dbEdit(fmt_str)
+        tid = self.checkTopic()
+        if tid:
+            print("Topic '"+self.topic+"' created succesfully!")
+            return tid
+        else:
+            self.conn.close()
+            sys.exit(1)
+
+    def makeUser(self):
+        fmt_str = self.INSERT_USER.format(
+            0,
+            2,
+            self.config['user'],
+            self.config['user'],
+            int(time.time()),
+            "Builder")
+        self.dbEdit(fmt_str)
+        uid = self.checkUser()
+        if uid:
+            print("User '"+self.config['user']+"' created succesfully!")
+            return uid
+        else:
+            self.conn.close()
+            sys.exit(1)
+
+    def makePost(self, msg):
+        post_time = int(time.time())
+        post_id = int(self.dbQuery("SELECT MAX(id) FROM posts")[0][0]) + 1
+
+        post_ins_str = self.INSERT_POST.format(
+            post_id,
+            self.config['user'],
+            self.user_id,
+            str(msg),
+            post_time,
+            self.topic_id)
+
+        topic_upd_str = self.UPDATE_TOPIC.format(
+            self.topic_id,
+            post_time,
+            post_id,
+            self.config['user'])
+
+        self.dbEdit(post_ins_str)
+        self.dbEdit(topic_upd_str)
+
+    def readConfig(self, configfile):
+        if os.path.isfile(configfile):
+            config = configparser.ConfigParser()
+            config.read(configfile)
+            self.config = dict(config['BuildBot'])
+        else:
+            print("Cannot access file '"+(configfile)+"'")
+            sys.exit(1)
+
+if __name__ == "__main__":
+
+    msg = ""
+
+    parser = argparse.ArgumentParser(
+        description='Paste message to the home server.')
+
+    parser.add_argument('message', metavar='msg', type=str, nargs='+',
+                        help='a message for the post')
+
+    args = parser.parse_args()
+
+    msg = ' '.join(args.message)
+    con = FluxBBBotConnector()
+
+    con.readConfig(os.path.join(os.path.expanduser("~"),
+                                ".homebbs.cfg"))
+
+    if not con.open():
+        sys.exit(1)
+
+    con.makePost(msg)
+
+    con.close()
