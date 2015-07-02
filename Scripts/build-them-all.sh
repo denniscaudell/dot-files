@@ -65,9 +65,10 @@ grep "\[STATUS\]" "${PKGDIR}/ccm32.log" >> "$SUMMARY"
 logmsg "buildbot - $(date -u) - building ends"
 
 notifyall "Ok, I finished the building. See you the next time ;)\n"\
-          "\n Here there is the building summary:\n"\
+          "\n Here there is the building summary:\n[code]\n"\
           "\n$(egrep '\[STATUS\].*(succeded|failed)' ${SUMMARY} |\
-           awk '{printf "%-20s %s\n", $3, $8}')"
+           awk '{printf "%-20s %s\n", $3, $8}')"\
+          "\n[/code]"
 
 if [[ "$(who | wc -l)" -eq 0 ]]; then
   # well, there is nobody logged-in :(
