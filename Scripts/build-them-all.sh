@@ -25,6 +25,9 @@ notifyall()
 logmsg()
 {
   echo "$@" | tee -a "$SUMMARY"
+
+  #posting on the home server board
+  bbsBotMessage "$@"
 }
 
 notifyall "I'm starting the weekly building check for the AUR packages."\
@@ -51,8 +54,8 @@ if [[ "$?" -ne 0  ]]; then
             "update the AUR packages from the git repo"
 fi
 
-"${PKGDIR}/ccm_test.sh" all 64
-"${PKGDIR}/ccm_test.sh" all 32
+sudo ccm64 n && sudo ccm64 c && "${PKGDIR}/ccm_test.sh" all 64
+sudo ccm32 n && sudo ccm32 c && "${PKGDIR}/ccm_test.sh" all 32
 
 logmsg "--- x86_64 ---"
 grep "\[STATUS\]" "${PKGDIR}/ccm64.log" >> "$SUMMARY"
