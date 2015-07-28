@@ -19,6 +19,9 @@ notifyall()
   sudo -u daddona DISPLAY=":0" notify-send -u normal "$NOTIFY_HEADER" "$*"
 
   wall "$*"
+
+  #posting on the home server board
+  /usr/bin/python ${HOME}/Scripts/bbsBotMessage "$*"
 }
 
 
@@ -51,8 +54,8 @@ if [[ "$?" -ne 0  ]]; then
             "update the AUR packages from the git repo"
 fi
 
-"${PKGDIR}/ccm_test.sh" all 64
-"${PKGDIR}/ccm_test.sh" all 32
+sudo ccm64 n && sudo ccm64 c && "${PKGDIR}/ccm_test.sh" all 64
+sudo ccm32 n && sudo ccm32 c && "${PKGDIR}/ccm_test.sh" all 32
 
 logmsg "--- x86_64 ---"
 grep "\[STATUS\]" "${PKGDIR}/ccm64.log" >> "$SUMMARY"
@@ -62,9 +65,10 @@ grep "\[STATUS\]" "${PKGDIR}/ccm32.log" >> "$SUMMARY"
 logmsg "buildbot - $(date -u) - building ends"
 
 notifyall "Ok, I finished the building. See you the next time ;)\n"\
-          "\n Here there is the building summary:\n"\
+          "\n Here there is the building summary:\n[code]\n"\
           "\n$(egrep '\[STATUS\].*(succeded|failed)' ${SUMMARY} |\
-           awk '{printf "%-20s %s\n", $3, $8}')"
+           awk '{printf "%-20s %s\n", $3, $8}')"\
+          "\n[/code]"
 
 if [[ "$(who | wc -l)" -eq 0 ]]; then
   # well, there is nobody logged-in :(
