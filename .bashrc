@@ -50,18 +50,21 @@ virtualbox() {
 #   echo "No fun for today, sorry..."
 # }
 
+alias alsaequal='alsamixer -D equal'
+alias ccm32='sudo ccm32'
+alias ccm64='sudo ccm64'
+alias ddnet-start='sudo netctl start DAddonaNet'
+alias ddnet-stop='sudo netctl stop DAddonaNet'
+alias ddnet-restart='sudo netctl restart DAddonaNet'
+alias less='less -R'
 alias ls='ls -l -h --color=auto --group-directories-first'
 alias mountu2='udisksctl mount -b'
-alias umountu2='udisksctl unmount -b'
 alias mountu2-iso='udisksctl loop-setup -r -f'
-alias umountu2-iso='udisksctl loop-delete -b'
-alias ccm64='sudo ccm64'
-alias ccm32='sudo ccm32'
 alias nspawna='sudo arch-nspawn'
 alias nspawnd='sudo systemd-nspawn'
-alias less='less -R'
 alias pdfview='apvlv'
-alias alsaequal='alsamixer -D equal'
+alias umountu2='udisksctl unmount -b'
+alias umountu2-iso='udisksctl loop-delete -b'
 
 eval $(dircolors -b "${HOME}/.dir_colors")
 
