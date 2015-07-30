@@ -19,7 +19,7 @@ xset +fp ~/.local/share/fonts
 
 [[ -e /usr/bin/nvida-settings ]] && /usr/bin/nvidia-settings -l
 
-sudo netctl start DAddonaNet &>> ~/.xsession-errors &
+# sudo netctl start DAddonaNet &>> ~/.xsession-errors &
 
 if [[ -z "$2" ]]; then
     echo "No DE/WM specified... we are back to console ;)" >> ~/.xsession-errors
