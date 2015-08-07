@@ -46,6 +46,35 @@ virtualbox() {
   fi
 }
 
+ddnet-check() {
+  echo "Checking internet connection..."
+  ping -W 1 -c 1 192.168.0.1 &> /dev/null 
+  if [[ $? -ne 0 ]]; then
+    echo "no response from the main router"
+    return 1
+  else
+    ping -W 1 -c 1 192.168.1.254 &> /dev/null
+    if [[ $? -ne 0 ]]; then
+      echo "no response from the main gateway"
+      return 2
+    else
+      ping -W 1 -c 1 193.187.74.3 &> /dev/null
+      if [[ $? -ne 0 ]]; then
+        echo "no response from ISP dns"
+        return 3
+      else
+        ping -W 1 -c 1 8.8.8.8 &> /dev/null
+        if [[ $? -ne 0 ]]; then
+          echo "no response from google dns"
+          return 4
+        else
+          echo "connection is ok."
+        fi
+      fi
+    fi
+  fi
+}
+
 # pacman() {
 #   echo "No fun for today, sorry..."
 # }
