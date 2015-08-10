@@ -50,11 +50,13 @@ conky.text = [[
 Uptime: $uptime_short \
 ^fg(\#00AFFF)^bg(\#005FFF)^fg(\#005FFF)^bg(\#262626) \
 ^ca()\
+^ca(1, ~/Scripts/dzen/fsinfo-popup.sh)\
 ^fg(\#F4D087)^fn(xbmicons:size=8)\
 ^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=8) \
 ${fs_used /}/${fs_size /} ${fs_bar 4}  \
 ^fg(\#F4D087)^fn(xbmicons:size=8)\
 ^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^ca()\
 $memperc% ${membar 4}  \
 ^fg(\#F4D087)^fn(xbmicons:size=8)\
 ^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=8) \
