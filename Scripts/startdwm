@@ -1,13 +1,13 @@
 #!/usr/bin/bash
 
 echo "[startdwm] loading config file: $HOME/Scripts/dwm/set_dwm_root_name" 
-source ~/Scripts/dwm/set_dwm_root_name
+source "$HOME/Scripts/dwm/set_dwm_root_name"
 
 echo "[startdwm] starting infostring loop..."
 while sleep 5; do xsetroot -name "$(getInfoString)"; done &
 
 echo "[startdwm] starting dzen2 statusbar..."
-~/Scripts/dzen/dzenbar &
+"$HOME"/Scripts/dzen/dzenbar &
 
 echo "[startdwm] starting dwm..."
 exec dwm
