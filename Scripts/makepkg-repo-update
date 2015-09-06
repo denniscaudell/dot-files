@@ -1,0 +1,38 @@
+#!/usr/bin/bash
+
+# Sourcing makepkg configuration
+source /etc/makepkg.conf
+[[ -f "${HOME}/.makepkg.conf" ]] && source "${HOME}/.makepkg.conf" 
+
+# This should never happen, however...
+[[ -z "${PKGEXT}" ]] && PKGEXT=".pkg.tar.xz"
+
+
+gpg_verify_and_sign() {
+  sigfile="${pkg}.sig"
+  if [[ -f "${sigfile}" ]]; then
+    if gpg --verify "${sigfile}" "${pkg}" &> /dev/null; then
+      echo "Found valid signature for '${pkg}'"
+    else
+      echo "Signature file is not valid or corrupted for '${pkg}'"
+      rm -f "${sigfile}"
+      gpg --batch --yes --detach-sign "$1"
+    fi
+  else
+    gpg --batch --no --detach-sign "$1"
+    echo "Signature file not found for '${pkg}'"
+  fi
+}
+
+# Now add the packages to the repo
+if [[ ! -z "${PKGDEST}" ]] && [[ -d "${PKGDEST}" ]]; then
+  echo ""
+  echo "Checking packages signatures with gpg"
+  for pkg in "${PKGDEST}"*"${PKGEXT}"; do
+    gpg_verify_and_sign "${pkg}"
+  done
+  echo ""
+  echo "Adding packages to the repo:"
+  repo-add -s -n -R "${PKGDEST}/makepkg.db.tar.gz" "${PKGDEST}"*"${PKGEXT}"
+  echo ""
+fi
