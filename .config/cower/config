@@ -26,7 +26,7 @@
 
 # Ignore the specified binary repos when checking for updates. Multiple arguments
 # to this option should be space delimited.
-#IgnoreRepo =
+IgnoreRepo = makepkg
 
 # Absolute path to download and extract to. Parameter and tilde expansions are
 # honored here.
