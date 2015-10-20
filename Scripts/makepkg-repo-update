@@ -33,6 +33,6 @@ if [[ ! -z "${PKGDEST}" ]] && [[ -d "${PKGDEST}" ]]; then
   done
   echo ""
   echo "Adding packages to the repo:"
-  repo-add -s -n -R "${PKGDEST}/makepkg.db.tar.gz" "${PKGDEST}"*"${PKGEXT}"
+  repo-add -s -R "${PKGDEST}/makepkg.db.tar.gz" "${PKGDEST}"*"${PKGEXT}"
   echo ""
 fi

@@ -79,7 +79,7 @@ XTerm*locale: true
 
 URxvt*skipBuiltinGlyphs: true
 URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=8,\
-            xft:KanjiStrokeOrders,\
+            xft:AR\ PL\ UMing\ TW\ MBE,\
             -*-xbmicons-medium-r-*-*-*-*-*-*-*-*-*-*
 
 URxvt*scrollTtyOutput: false
