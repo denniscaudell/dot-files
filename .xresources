@@ -74,12 +74,11 @@ XTerm*locale: true
 *font: -*-dejavu sans mono-medium-r-*-*-12-*-*-*-*-*-*-* 
 
 *faceName: DejaVu\ Sans\ Mono\ for\ Powerline
-*faceNameDoublesize: KanjiStrokeOrders
-*faceSize: 8
+*faceSize: 11 
 
 URxvt*skipBuiltinGlyphs: true
-URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=8,\
-            xft:AR\ PL\ UMing\ TW\ MBE,\
+URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=11,\
+            xft:AR\ PL\ UMing\ TW\ MBE:size)11,\
             -*-xbmicons-medium-r-*-*-*-*-*-*-*-*-*-*
 
 URxvt*scrollTtyOutput: false

@@ -43,71 +43,71 @@ conky.text = [[
 ^ca(1, ~/Scripts/dzen/sysinfo-popup.sh)\
 ^fg(\#000000)\
 ^bg(\#00AFFF)\
-^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(DejaVu Sans Mono for Powerline:size=12)\
   ArchLinux $kernel on $machine \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ^fg(\#444444)  ^fg(\#000000) \
 Uptime: $uptime_short \
 ^fg(\#00AFFF)^bg(\#005FFF)^fg(\#005FFF)^bg(\#262626) \
 ^ca()\
 ^ca(1, ~/Scripts/dzen/fsinfo-popup.sh)\
-^fg(\#F4D087)^fn(xbmicons:size=8)\
-^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#F4D087)^fn(xbmicons:size=12)\
+^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=12) \
 ${fs_used /}/${fs_size /} ${fs_bar 4}  \
-^fg(\#F4D087)^fn(xbmicons:size=8)\
-^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#F4D087)^fn(xbmicons:size=12)\
+^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=12) \
 ^ca()\
 $memperc% ${membar 4}  \
-^fg(\#F4D087)^fn(xbmicons:size=8)\
-^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#F4D087)^fn(xbmicons:size=12)\
+^fg(\#FFFFFF)^fn(DejaVu Sans Mono for Powerline:size=12) \
 ${acpitemp}°C ${freq}Mhz $cpu% ${cpubar 4} \
 ${if_up enp2s0}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8) \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12) \
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ${upspeed enp2s0}   \
-^fn(xbmicons)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ${downspeed enp2s0}  \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^fn(xbmicons:size=8)\
-^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#262626)^fn(xbmicons:size=12)\
+^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=12) \
 PKG ${execi 600 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
 ${if_up eth1}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8) \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12) \
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ${upspeed eth1}   \
-^fn(xbmicons)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ${downspeed eth1}  \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^fn(xbmicons:size=8)\
-^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#262626)^fn(xbmicons:size=12)\
+^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=12) \
 PKG ${execi 600 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
-${if_up wlp1s0}\
+${if_up wlp3s0}\
 ^fg(\#005FFF)^bg(\#262626)^fg(\#00AFFF)^bg(\#005FFF)\
 ^bg(\#00AFFF)^fg(\#000000) \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8) \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12) \
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ${upspeed wlp1s0}   \
-^fn(xbmicons:size=8)^fn(DejaVu Sans Mono for Powerline:size=8)\
+^fn(xbmicons:size=12)^fn(DejaVu Sans Mono for Powerline:size=12)\
 ${downspeed wlp1s0}  \
 ^fg(\#AFFF00)^bg(\#00AFFF)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^fn(xbmicons:size=8)\
-^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#262626)^fn(xbmicons:size=12)\
+^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=12) \
 PKG ${execi 1800 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
 ^fg(\#7F3800)^bg(\#262626)^fg(\#D75F00)^bg(\#7F3800)\
 ^bg(\#D75F00)^fg(\#000000) Off-Line  \
 ^fg(\#AFFF00)^bg(\#D75F00)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^fn(xbmicons:size=8)\
-^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=8) \
+^fg(\#262626)^fn(xbmicons:size=12)\
+^fg(\#000000)^fn(DejaVu Sans Mono for Powerline:size=12) \
 PKG --  \
 AUR --\
 ${endif}${endif}${endif}  \

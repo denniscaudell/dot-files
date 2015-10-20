@@ -6,6 +6,14 @@
   XF86MonBrightnessDown+Shift
 "xbacklight -dec 10"
   XF86MonBrightnessDown
+"kbdlight up 1%"
+  XF86KbdBrightnessUp+Shift
+"kbdlight up 10%"
+  XF86KbdBrightnessUp
+"kbdlight down 1%"
+  XF86KbdBrightnessDown+Shift
+"kbdlight down 10%"
+  XF86KbdBrightnessDown
 "pulseaudio-ctl mute"
   XF86AudioMute
 "pulseaudio-ctl down"
@@ -16,14 +24,6 @@
   XF86AudioRaiseVolume
 "pulseaudio-ctl up"
   Shift+Up
-"samsung-tools --show-notify --bluetooth toggle"
-  XF86Launch1
-"samsung-tools --show-notify --cpu cycle"
-  XF86Launch3
-"samsung-tools --show-notify --wireless toggle"
-  XF86WLAN
-"samsung-tools --show-notify --backlight toggle"
-  XF86Display
 "systemctl suspend"
   XF86Suspend
 "systemctl suspend"
@@ -32,5 +32,3 @@
   Control+XF86PowerOff
 "systemctl reboot"
   Control+Alt+XF86PowerOff
-"SamsungToolsDummyCommand"
-  Control+Alt+Shift+Mod4+F1+F2+F3

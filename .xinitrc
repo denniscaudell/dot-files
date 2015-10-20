@@ -28,6 +28,7 @@ else
     case "$2" in
         dwm)
             [[ -f ~/.xprofile ]] && source ~/.xprofile
+            xrandr --dpi 144
             exec ~/Scripts/startdwm &>> ~/.xsession-errors
             ;;
         kde)
@@ -35,5 +36,8 @@ else
             echo "KDE support temporary removed!"
             echo "back to the console..."
             ;;
+        openbox)
+            [[ -f ~/.xprofile ]] && source ~/.xprofile
+            exec /usr/bin/openbox &>> ~/.xsession-errors
     esac
 fi
