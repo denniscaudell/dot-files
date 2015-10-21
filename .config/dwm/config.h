@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
-#define GAP_BOTTOM 15
+#define GAP_BOTTOM 25
 #define GAP_TOP 0
 /* appearance */
-static const char font[]            = "Sans 8, xbmicons 8";
+static const char font[]            = "Sans 12, xbmicons 12";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";

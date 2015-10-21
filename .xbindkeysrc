@@ -32,3 +32,7 @@
   Control+XF86PowerOff
 "systemctl reboot"
   Control+Alt+XF86PowerOff
+"sudo rfkill unblock 0"
+  XF86LaunchA
+"sudo rfkill block 0"
+  Shift+XF86LaunchA
