@@ -12,7 +12,7 @@
        gsub(/\/dev\//, "", $5)
        printf "%-10s %+6s/%-4s %s %s (%s)\n", $1, $2, $3, bar, $4, $5;
     }' | sort
-) | dzen2 -p -x "350" -y "-30" -w "350" -l "5" -sa 'l' -ta 'c'\
+) | dzen2 -p -x "420" -y "-48" -w "500" -l "5" -sa 'l' -ta 'c'\
    -title-name 'popup_sysinfo' -e 'onstart=uncollapse;button1=exit;button3=exit'\
    -bg \#000000 -fn "DejaVu Sans Mono for Powerline:size=12"
 
