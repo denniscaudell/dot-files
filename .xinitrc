@@ -4,7 +4,9 @@
 #
 # Executed by startx (run your window manager from here)
 
-echo "" > ~/.xsession-errors
+logfile="${HOME}/.xsession-errors.$XDG_VTNR"
+
+echo "" > "${logfile}"
 
 if [[ -d /etc/X11/xinit/xinitrc.d ]]; then
   for f in /etc/X11/xinit/xinitrc.d/*; do
@@ -19,17 +21,16 @@ xset +fp ~/.local/share/fonts
 
 [[ -e /usr/bin/nvida-settings ]] && /usr/bin/nvidia-settings -l
 
-sudo netctl start DAddonaNet &>> ~/.xsession-errors &
+sudo netctl start DAddonaNet &>> "${logfile}" &
 
 if [[ -z "$2" ]]; then
-    echo "No DE/WM specified... we are back to console ;)" >> ~/.xsession-errors
+    echo "No DE/WM specified... we are back to console ;)" >> "${logfile}"
 else
-
+    [[ -f ~/.xprofile ]] && source ~/.xprofile
     case "$2" in
         dwm)
-            [[ -f ~/.xprofile ]] && source ~/.xprofile
             xrandr --dpi 144
-            exec ~/Scripts/startdwm &>> ~/.xsession-errors
+            exec ~/Scripts/startdwm &>> "${logfile}"
             ;;
         kde)
             #exec /usr/bin/startkde &>> ~/.xsession-errors
@@ -37,7 +38,18 @@ else
             echo "back to the console..."
             ;;
         openbox)
-            [[ -f ~/.xprofile ]] && source ~/.xprofile
-            exec /usr/bin/openbox &>> ~/.xsession-errors
+            exec /usr/bin/openbox &>> "${logfile}"
+
+            ;;
+        virtualbox)
+            exec /usr/bin/vboxsdl \
+              --fullscreen \
+              --fullscreenresize \
+              --nofstoggle \
+              --noresize \
+              --nohostkey \
+              --hwvirtex \
+              -s archtest &>> "${logfile}"
+            ;;
     esac
 fi

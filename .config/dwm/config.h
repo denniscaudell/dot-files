@@ -2,7 +2,7 @@
 #define GAP_BOTTOM 25
 #define GAP_TOP 0
 /* appearance */
-static const char font[]            = "Sans 12, xbmicons 12";
+static const char font[]            = "Sans 12";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -15,7 +15,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹" };
+static const char *tags[] = { "⌨¹", "⌨²", "⌨³", "≣⁴", "≣⁵", "▣⁶", "♫⁷", "✉⁸", "℮⁹" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
