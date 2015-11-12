@@ -3,10 +3,10 @@
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
+ 
+export STARTX_LOG_FILE="${HOME}/.xsession-errors.tty${XDG_VTNR}"
 
-logfile="${HOME}/.xsession-errors.$XDG_VTNR"
-
-echo "" > "${logfile}"
+echo "" > "${STARTX_LOG_FILE}"
 
 if [[ -d /etc/X11/xinit/xinitrc.d ]]; then
   for f in /etc/X11/xinit/xinitrc.d/*; do
@@ -21,16 +21,16 @@ xset +fp ~/.local/share/fonts
 
 [[ -e /usr/bin/nvida-settings ]] && /usr/bin/nvidia-settings -l
 
-sudo netctl start DAddonaNet &>> "${logfile}" &
+sudo netctl start DAddonaNet &>> "${STARTX_LOG_FILE}" &
 
 if [[ -z "$2" ]]; then
-    echo "No DE/WM specified... we are back to console ;)" >> "${logfile}"
+    echo "No DE/WM specified... we are back to console ;)" >> "${STARTX_LOG_FILE}"
 else
     [[ -f ~/.xprofile ]] && source ~/.xprofile
     case "$2" in
         dwm)
             xrandr --dpi 144
-            exec ~/Scripts/startdwm &>> "${logfile}"
+            exec ~/Scripts/startdwm &>> "${STARTX_LOG_FILE}"
             ;;
         kde)
             #exec /usr/bin/startkde &>> ~/.xsession-errors
@@ -38,7 +38,7 @@ else
             echo "back to the console..."
             ;;
         openbox)
-            exec /usr/bin/openbox &>> "${logfile}"
+            exec /usr/bin/openbox &>> "${STARTX_LOG_FILE}"
 
             ;;
         virtualbox)
@@ -49,7 +49,7 @@ else
               --noresize \
               --nohostkey \
               --hwvirtex \
-              -s archtest &>> "${logfile}"
+              -s archtest &>> "${STARTX_LOG_FILE}"
             ;;
     esac
 fi
