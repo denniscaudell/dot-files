@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+osd_cat \
+  -f "-misc-dejavu sans mono-*-r-*--32-*-*-*-*-*-*-*" \
+  -c green \
+  -p middle \
+  -A center \
+  -d 1 \
+  -T "$1" \
+  -b percentage \
+  -P "$2" 
+
+#vim: ts=2 sw=2 syntax=bash

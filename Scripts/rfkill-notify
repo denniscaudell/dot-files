@@ -1,0 +1,37 @@
+#!/usr/bin/bash
+
+if [[ -z "$2" ]]; then
+  WIFI_RFID="all"
+else
+  WIFI_RFID="$2"
+fi
+
+case $1 in 
+  "on")
+    /usr/bin/sudo /usr/bin/rfkill unblock ${WIFI_RFID}
+    /usr/bin/notify-send \
+      -u normal \
+      -t 3000 \
+      -c "system" \
+      -i "network-wireless" \
+      "Wi-Fi enabled" "$(rfkill list ${WIFI_RFID})"
+    ;;
+  "off")
+    /usr/bin/sudo /usr/bin/rfkill block ${WIFI_RFID}
+    /usr/bin/notify-send \
+      -u normal \
+      -t 3000 \
+      -c "system" \
+      -i "network-wireless-disconnected" \
+      "Wi-Fi disabled" "$(rfkill list ${WIFI_RFID})"
+    ;;
+  *)
+    echo ""
+    echo "Usage: rfkill-notify [on|off] [$$WIFI_RFID]"
+    echo ""
+    echo "  WIFI_RFID: The rfkill id of the device. Default is 'all'"
+    echo ""
+    ;;
+esac
+
+#vim: ts=2 sw=2 syntax=bash
