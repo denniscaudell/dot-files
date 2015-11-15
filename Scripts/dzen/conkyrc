@@ -40,61 +40,66 @@ conky.config = {
 }
 
 conky.text = [[
+^fn(DejaVu Sans Mono for Powerline:size=12)\
 ^ca(1, ~/Scripts/dzen/sysinfo-popup.sh)\
 ^fg(\#000000)\
 ^bg(\#00AFFF)\
-^fn(DejaVu Sans Mono for Powerline:size=12)\
   ArchLinux $kernel on $machine \
 ^fg(\#444444)  ^fg(\#000000) \
 Uptime: $uptime_short \
 ^fg(\#00AFFF)^bg(\#005FFF)^fg(\#005FFF)^bg(\#262626) \
 ^ca()\
 ^ca(1, ~/Scripts/dzen/fsinfo-popup.sh)\
-^fg(\#F4D087)^i(xbm/disk-16.xbm)^fg(\#FFFFFF) \
+^fg(\#F4D087)^i(Scripts/dzen/xbm/disk-16.xbm)^fg(\#FFFFFF) \
 ${fs_used /}/${fs_size /} ${fs_bar 4}  \
-^fg(\#F4D087)^i(xbm/ram-16.xbm)^fg(\#FFFFFF) \
 ^ca()\
+^ca(1, ~/Scripts/dzen/raminfo-popup.sh)\
+^fg(\#F4D087)^i(Scripts/dzen/xbm/ram-16.xbm)^fg(\#FFFFFF) \
 $memperc% ${membar 4}  \
-^fg(\#F4D087)^i(xbm/cpu-16.xbm)^fg(\#FFFFFF) \
-${acpitemp}°C ${freq}Mhz $cpu% ${cpubar 4} \
+^ca()\
+^ca(1, ~/Scripts/dzen/cpuinfo-popup.sh)\
+^fg(\#F4D087)^i(Scripts/dzen/xbm/cpu-16.xbm)^fg(\#FFFFFF) \
+${acpitemp}°C $cpu% ${cpubar 4} ${freq_g 1} ${freq_g 2} ${freq_g 3} ${freq_g 4} GHz \
+^ca()\
 ${if_up enp2s0}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
-^i(xbm/eth-16.xbm) ↓${upspeed enp2s0}   ↑${downspeed enp2s0}  \
+^i(~/Scripts/dzen/xbm/eth-16.xbm) ↓${upspeed enp2s0}   ↑${downspeed enp2s0}  \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^i(xbm/arch-16.xbm)^fg(\#000000) \
+^fg(\#262626)^i(Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 600 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
 ${if_up eth1}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
-^i(xbm/eth-16.xbm) ↓${upspeed eth1}   ↑${downspeed eth1}  \
+^i(~/Scripts/dzen/xbm/eth-16.xbm) ↓${upspeed eth1}   ↑${downspeed eth1}  \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^i(xbm/arch-16.xbm)^fg(\#000000) \
+^fg(\#262626)^i(~/Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 600 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
 ${if_up wlp3s0}\
 ^fg(\#005FFF)^bg(\#262626)^fg(\#00AFFF)^bg(\#005FFF)\
-^bg(\#00AFFF)^fg(\#000000) ^i(xbm/wifi-16.xbm) \
+^bg(\#00AFFF)^fg(\#000000) ^i(Scripts/dzen/xbm/wifi-16.xbm) \
 ↓${upspeed wlp3s0}   ↑${downspeed wlp3s0}  \
 ^fg(\#AFFF00)^bg(\#00AFFF)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^i(xbm/arch-16.xbm)^fg(\#000000) \
+^fg(\#262626)^i(Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 1800 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
 ^fg(\#7F3800)^bg(\#262626)^fg(\#D75F00)^bg(\#7F3800)\
 ^bg(\#D75F00)^fg(\#000000) Off-Line  \
 ^fg(\#AFFF00)^bg(\#D75F00)^fg(\#000000)^bg(\#AFFF00) \
-^fg(\#262626)^i(xbm/arch-16.xmb)^fg(\#000000) \
+^fg(\#262626)^i(Scripts/dzen/xbm/arch-16.xmb)^fg(\#000000) \
 PKG --  \
 AUR --\
 ${endif}${endif}${endif}  \
 ${if_existing /sys/class/power_supply/BAT0}\
 ${if_match ${battery_percent BAT0} < 5}\
 ${blink ^fg(\#D75F00)^bg(\#AFFF00)^fg(\#000000)^bg(\#D75F00)\
-  Battery Low!}\
+ ^i(Scripts/dzen/xbm/bat-16.xbm)} \
+^fg(\#AFFF00)^bg(\#D75F00)^bg(\#AFFF00)^fg(\#B474C8)\
 ${else}\
 \
 ${endif}\
