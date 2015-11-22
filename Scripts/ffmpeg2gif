@@ -1,0 +1,69 @@
+#!/usr/bin/bash
+
+#Idea taken from here:
+# http://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality
+
+readonly TMP_PALETTE="/tmp/palette.png"
+
+usage() {
+  cat <<EOF
+
+Usage: $0 [OPTIONS] INPUT_FILE"
+
+Options:
+
+  -s, --scale HEIGHT           Scale the image to fit the given height HEIGHT.
+                                 If not specified then HEIGHT=-1 is assumed
+                                 (which means original size is preserved)
+  -f, --fps   FPS              Set the fps of the animation to FPS.
+                                 If not specified then FPS=10 is assumed
+
+EOF
+  exit 1
+}
+
+while true; do
+  case "$1" in
+    -s|--scale)
+      SCALE="$2"
+      shift
+      ;;
+    -f|--fps)
+      FPS="$2"
+      shift
+      ;;
+    -?*)
+      usage
+      break
+      ;;
+    *)
+      input_file="$1"
+      break
+      ;;
+  esac
+
+  shift
+
+done
+
+if [[ -z "$input_file" ]]; then
+  echo "No input file!"
+  exit 1
+elif [[ ! -f "$input_file" ]]; then
+  echo "No such file or directory!"
+  exit 1
+fi
+
+if [[ -z "$FPS" ]]; then
+  FPS=10
+fi
+
+if [[ -z "$FPS" ]]; then
+  SCALE="-1"
+fi
+
+echo "generating palette..."
+ffmpeg -y -loglevel warning -i ${input_file} -vf fps=${FPS},scale=-1:${SCALE}:flags=lanczos,palettegen "${TMP_PALETTE}"
+
+echo "converting file..."
+ffmpeg -y -loglevel warning -i ${input_file} -i ${TMP_PALETTE} -filter_complex "fps=${FPS},scale=-1:${SCALE}:flags=lanczos[x];[x][1:v]paletteuse" "${input_file}.gif"
