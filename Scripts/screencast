@@ -1,0 +1,8 @@
+size="$(xrandr --query | awk '/*/ {print $1}')"
+
+if [[ -z "$1" ]]; then
+  echo "no file name provided!"
+  exit 1
+fi
+
+ffmpeg -f x11grab -video_size "${size}" -i $DISPLAY -f alsa -i default -c:v ffvhuff -c:a libx264 -b:v 200k -s 1280x720 "$1"
