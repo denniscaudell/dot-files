@@ -11,9 +11,12 @@ set mouse=a
 
 set tabstop=2
 set shiftwidth=2
+set expandtab
+
 autocmd FileType html setlocal sw=2 ts=2
 autocmd FileType python setlocal sw=4 ts=4
-set expandtab
+autocmd FileType make setlocal noexpandtab
+
 set backupdir=/mnt/CACHE/.vimcache/backup
 set guifont=xbmicons,DejaVu\ Sans\ Mono\ for\ Powerline:size=8,KanjiStrokeOrders
 

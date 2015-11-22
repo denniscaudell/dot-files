@@ -9,12 +9,13 @@ UPTIME=$( uptime | sed 's/.* up //' | sed 's/[0-9]* us.*//' | sed 's/ day, /d /'
          |  sed 's/,/m/' | sed 's/  / /')
 
 (
-  echo "System Information" # Fist line goes to title
+  echo -e "\n"
+  echo "  System Information" # Fist line goes to title
   # The following lines go to slave window
-  echo "Host: $HOST "
-  echo "Kernel: $KERNEL"
-  echo "Uptime: $UPTIME "
-) | dzen2 -p -x "10" -y "-48" -w "400" -l "5" -sa 'l' -ta 'c'\
+  echo "  Host: $HOST "
+  echo "  Kernel: $KERNEL"
+  echo "  Uptime: $UPTIME "
+) | dzen2 -p -x "10" -y "-48" -w "400" -l "6" -sa 'l' -ta 'c'\
    -title-name 'popup_sysinfo' -e 'onstart=uncollapse;button1=exit;button3=exit'\
    -bg \#000000 -fg \#ffffff -fn "DejaVu Sans Mono for Powerline:size=12"
 

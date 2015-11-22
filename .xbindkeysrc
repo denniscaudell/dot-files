@@ -6,13 +6,13 @@
   XF86MonBrightnessDown+Shift
 "xbacklight -dec 10 && osdbar 'screen brightness' $(xbacklight)"
   XF86MonBrightnessDown
-"kbdlight up 1% && osdbar 'keyboard brightness' $(kbdlight get)"
+"kbdlight up 1% && osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
   XF86KbdBrightnessUp+Shift
-"kbdlight up 10% && osdbar 'keyboard brightness' $(kbdlight get)"
+"kbdlight up 10% && osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
   XF86KbdBrightnessUp
-"kbdlight down 1% && osdbar 'keyboard brightness' $(kbdlight get)"
+"kbdlight down 1% && osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
   XF86KbdBrightnessDown+Shift
-"kbdlight down 10% &&  osdbar 'keyboard brightness' $(kbdlight get)"
+"kbdlight down 10% &&  osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
   XF86KbdBrightnessDown
 "pulseaudio-ctl mute; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   XF86AudioMute
