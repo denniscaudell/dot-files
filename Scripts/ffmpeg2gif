@@ -58,7 +58,7 @@ if [[ -z "$FPS" ]]; then
   FPS=10
 fi
 
-if [[ -z "$FPS" ]]; then
+if [[ -z "$SCALE" ]]; then
   SCALE="-1"
 fi
 
