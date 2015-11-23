@@ -62,8 +62,19 @@ if [[ -z "$FPS" ]]; then
   SCALE="-1"
 fi
 
-echo "generating palette..."
-ffmpeg -y -loglevel warning -i ${input_file} -vf fps=${FPS},scale=-1:${SCALE}:flags=lanczos,palettegen "${TMP_PALETTE}"
+echo "==> generating palette..."
+ffmpeg \
+  -y \
+  -loglevel warning \
+  -i ${input_file} \
+  -vf fps=${FPS},scale=-1:${SCALE}:flags=lanczos,palettegen \
+  "${TMP_PALETTE}"
 
-echo "converting file..."
-ffmpeg -y -loglevel warning -i ${input_file} -i ${TMP_PALETTE} -filter_complex "fps=${FPS},scale=-1:${SCALE}:flags=lanczos[x];[x][1:v]paletteuse" "${input_file}.gif"
+echo "==> converting file..."
+ffmpeg \
+  -y \
+  -loglevel warning \
+  -i ${input_file} \
+  -i ${TMP_PALETTE} \
+  -filter_complex "fps=${FPS},scale=-1:${SCALE}:flags=lanczos[x];[x][1:v]paletteuse" \
+  "${input_file}.gif"

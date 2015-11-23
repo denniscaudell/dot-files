@@ -1,13 +1,60 @@
-size="$(xrandr --query | awk '/*/ {print $1}')"
+#!/usr/bin/bash
 
-if [[ -z "$1" ]]; then
-  echo "no file name provided!"
+#Idea taken from here:
+# https://wiki.archlinux.org/index.php/FFmpeg#Screen_cast
+
+usage() {
+  cat <<EOF
+
+Usage: $0 [OPTIONS] INPUT_FILE"
+
+Options:
+
+  -b, --bitrate BRATE           Set the birtare of the video stream.
+                                 If not specified then BRATE=2000k is assumed.
+EOF
+  exit 1
+}
+
+while true; do
+  case "$1" in
+    -b|--bitrate)
+      BRATE="$2"
+      shift
+      ;;
+    -?*)
+      usage
+      break
+      ;;
+    *)
+      OUTFILE="$1"
+      break
+      ;;
+  esac
+
+  shift
+
+done
+
+if [[ -z "$OUTFILE" ]]; then
+  echo "No output file specified!"
   exit 1
 fi
 
-if [[ -z "" ]]; then
-  brate=2000k
+if [[ -z "$BRATE" ]]; then
+  BRATE=2000K
 fi
 
 
-ffmpeg -f x11grab -video_size "${size}" -i $DISPLAY -f alsa -i default -c:v libx264 -c:a libmp3lame -b:v ${brate} "$1.mp4"
+SCR_SIZE="$(xrandr --query | awk '/*/ {print $1}')"
+
+ffmpeg \
+  -f x11grab \
+  -video_size "${SCR_SIZE}" \
+  -i $DISPLAY \
+  -f alsa \
+  -i default \
+  -c:v libx264 \
+  -c:a libmp3lame \
+  -b:v ${BRATE} \
+  "${OUTFILE}"
