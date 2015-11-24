@@ -1,29 +1,29 @@
-"xbacklight -inc 1"
+"xbacklight -inc 1 && osdbar 'screen brightness' $(xbacklight)"
   XF86MonBrightnessUp+Shift
-"xbacklight -inc 10"
+"xbacklight -inc 10 && osdbar 'screen brightness' $(xbacklight)"
   XF86MonBrightnessUp
-"xbacklight -dec 1"
+"xbacklight -dec 1 && osdbar 'screen brightness' $(xbacklight)"
   XF86MonBrightnessDown+Shift
-"xbacklight -dec 10"
+"xbacklight -dec 10 && osdbar 'screen brightness' $(xbacklight)"
   XF86MonBrightnessDown
-"pulseaudio-ctl mute"
+"kbdlight up 1% && osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
+  XF86KbdBrightnessUp+Shift
+"kbdlight up 10% && osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
+  XF86KbdBrightnessUp
+"kbdlight down 1% && osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
+  XF86KbdBrightnessDown+Shift
+"kbdlight down 10% &&  osdbar 'keyboard brightness' $(kbdlight get | awk '{print $1/2.55}')"
+  XF86KbdBrightnessDown
+"pulseaudio-ctl mute; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   XF86AudioMute
-"pulseaudio-ctl down"
+"pulseaudio-ctl down; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   XF86AudioLowerVolume
-"pulseaudio-ctl down"
+"pulseaudio-ctl down; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   Shift+Down
-"pulseaudio-ctl up"
+"pulseaudio-ctl up; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   XF86AudioRaiseVolume
-"pulseaudio-ctl up"
+"pulseaudio-ctl up; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   Shift+Up
-"samsung-tools --show-notify --bluetooth toggle"
-  XF86Launch1
-"samsung-tools --show-notify --cpu cycle"
-  XF86Launch3
-"samsung-tools --show-notify --wireless toggle"
-  XF86WLAN
-"samsung-tools --show-notify --backlight toggle"
-  XF86Display
 "systemctl suspend"
   XF86Suspend
 "systemctl suspend"
@@ -32,5 +32,7 @@
   Control+XF86PowerOff
 "systemctl reboot"
   Control+Alt+XF86PowerOff
-"SamsungToolsDummyCommand"
-  Control+Alt+Shift+Mod4+F1+F2+F3
+"rfkill-notify on all"
+  XF86LaunchA
+"rfkill-notify off all"
+  Shift+XF86LaunchA

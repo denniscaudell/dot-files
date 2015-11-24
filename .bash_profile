@@ -10,4 +10,5 @@ export AURDIR="${HOME}/Documents/informatica/AUR/personal"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx dwm
+[[ -z $DISPLAY && $XDG_VTNR -eq 2 ]] && exec startx virtualbox
 

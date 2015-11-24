@@ -71,15 +71,17 @@
 
 XTerm*locale: true
 
+Xft.dpi:    144
+
 *font: -*-dejavu sans mono-medium-r-*-*-12-*-*-*-*-*-*-* 
 
 *faceName: DejaVu\ Sans\ Mono\ for\ Powerline
-*faceNameDoublesize: KanjiStrokeOrders
-*faceSize: 8
+*faceSize: 13 
 
+URxvt.depth:32
 URxvt*skipBuiltinGlyphs: true
-URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=8,\
-            xft:KanjiStrokeOrders,\
+URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=13,\
+            xft:AR\ PL\ UMing\ TW\ MBE:size)13,\
             -*-xbmicons-medium-r-*-*-*-*-*-*-*-*-*-*
 
 URxvt*scrollTtyOutput: false

@@ -5,7 +5,7 @@ source ~/Scripts/dwm/dwm_pango_defs
 getInfoString()
 {
     local ADP_STATUS="$(getADPStatus /sys/class/power_supply/ADP1)"
-    local BAT_STATUS="$(getBatteryStatus /sys/class/power_supply/BAT1)"
+    local BAT_STATUS="$(getBatteryStatus /sys/class/power_supply/BAT0)"
     local VOL_STATUS="$(getVolumeStatus)"
     local ET0_STATUS="${SIGN_NET}$(getConnectionStatus eth0)"
     local ET1_STATUS="${SIGN_NET}$(getConnectionStatus eth1)"
