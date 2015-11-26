@@ -108,10 +108,10 @@ ${endif}${endif}${endif} \
 ${if_existing /sys/class/power_supply/BAT0}\
 ${if_match ${battery_percent BAT0} < 5}\
 ${blink ^fg(\#D75F00)^bg(\#AFFF00)^fg(\#000000)^bg(\#D75F00)\
- ^i(Scripts/dzen/xbm/bat-16.xbm) \
+ ^i(Scripts/dzen/xbm/bat-16.xbm) ${battery_short} ${battery_time} \
 ^fg(\#AFFF00)^bg(\#D75F00)^bg(\#AFFF00)^fg(\#B474C8)}\
 ${else}\
-\
+ ^i(Scripts/dzen/xbm/bat-16.xbm) ${battery_short} ${battery_time}  \
 ${endif}\
 ${endif}\
-\  \  \  \  \  \  \  \  \  \  \  \  \  \  \  \  \  \  \  \  \  ]]
+                                                                         ]]

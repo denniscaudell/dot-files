@@ -1,8 +1,6 @@
 conky -c ~/Scripts/dzen/conkyrc | \
 sed -E -u \
-  -e "s/##/██/g"\
-  -e "s/#_/█░/g"\
-  -e "s/__/░░/g" \
-  -e "s/     +/    /g" \
-  -e "s/\\\ / /g" | \
+  -e "s/##/██/g" \
+  -e "s/#_/█░/g" \
+  -e "s/__/░░/g" | \
 dzen2 -e p2 -y -1 -fn ":size=12" -expand r -p 1
