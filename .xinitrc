@@ -49,7 +49,7 @@ else
               --noresize \
               --nohostkey \
               --hwvirtex \
-              -s archtest &>> "${STARTX_LOG_FILE}"
+              -s debian &>> "${STARTX_LOG_FILE}"
             ;;
     esac
 fi

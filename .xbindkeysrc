@@ -18,12 +18,8 @@
   XF86AudioMute
 "pulseaudio-ctl down; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   XF86AudioLowerVolume
-"pulseaudio-ctl down; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
-  Shift+Down
 "pulseaudio-ctl up; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
   XF86AudioRaiseVolume
-"pulseaudio-ctl up; osdbar "$(pulseaudio-ctl full-status | awk '{printf "volume %3s [muted: %3s]", $1, $2}')" $(pulseaudio-ctl current)"
-  Shift+Up
 "systemctl suspend"
   XF86Suspend
 "systemctl suspend"
