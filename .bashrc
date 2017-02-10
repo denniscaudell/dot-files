@@ -28,7 +28,7 @@ man() {
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
     LESS_TERMCAP_me=$'\E[0m' \
     LESS_TERMCAP_se=$'\E[0m' \
-    LESS_TERMCAP_so=$'\E[38;5;246m' \
+    LESS_TERMCAP_so=$'\E[48;5;246m\E[38;5;255m' \
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     /usr/bin/man "$@"
@@ -93,6 +93,5 @@ alias nspawnd='sudo systemd-nspawn'
 alias pdfview='apvlv'
 alias umountu2='udisksctl unmount -b'
 alias umountu2-iso='udisksctl loop-delete -b'
-
 eval $(dircolors -b "${HOME}/.dir_colors")
 

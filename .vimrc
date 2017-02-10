@@ -36,7 +36,7 @@ syntax enable
 autocmd FileType html setlocal sw=2 ts=2
 autocmd FileType python setlocal sw=4 ts=4
 autocmd FileType make setlocal noexpandtab
-autocmd vimenter * MBEOpen
+"autocmd vimenter * MBEOpen
 
 map <C-n> :TlistToggle<CR>
 map <C-l> :set background=light<CR>

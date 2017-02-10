@@ -1,0 +1,5 @@
+USER="${1}"
+IP="$(hamachi list | awk ' NR > 1 {if( $2 == "206-985-814"){print $4}}')"
+
+echo "connecting to ${USER}@${IP}..."
+ssh ${USER}@${IP}

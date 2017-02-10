@@ -44,9 +44,9 @@ conky.text = [[
 ^ca(1, ~/Scripts/dzen/sysinfo-popup.sh)\
 ^fg(\#000000)\
 ^bg(\#00AFFF)\
-  ArchLinux $kernel on $machine \
+  ArchLinux$machine $kernel \
 ^fg(\#444444)  ^fg(\#000000) \
-Uptime: $uptime_short \
+$uptime_short \
 ^fg(\#00AFFF)^bg(\#005FFF)^fg(\#005FFF)^bg(\#262626) \
 ^ca()\
 ^ca(1, ~/Scripts/dzen/fsinfo-popup.sh)\
@@ -72,7 +72,6 @@ ${if_up enp2s0}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
 ^i(~/Scripts/dzen/xbm/eth-16.xbm) ↑${upspeed enp2s0}   ↓${downspeed enp2s0} \
-${execi 15 ~/Scripts/dzen/net-check.sh} \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
 ^fg(\#262626)^i(Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 600 checkupdates | wc -l}  \
@@ -82,7 +81,6 @@ ${if_up eth1}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
 ^i(~/Scripts/dzen/xbm/eth-16.xbm) ↑${upspeed eth1}   ↓${downspeed eth1} \
-${execi 15 ~/Scripts/dzen/net-check.sh} \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
 ^fg(\#262626)^i(~/Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 600 checkupdates | wc -l}  \
@@ -92,7 +90,6 @@ ${if_up wlp3s0}\
 ^fg(\#005FFF)^bg(\#262626)^fg(\#00AFFF)^bg(\#005FFF)\
 ^bg(\#00AFFF)^fg(\#000000) \
 ^i(Scripts/dzen/xbm/wifi-16.xbm) ↑${upspeed wlp3s0}   ↓${downspeed wlp3s0} \
-${execi 15 ~/Scripts/dzen/net-check.sh} \
 ^fg(\#AFFF00)^bg(\#00AFFF)^fg(\#000000)^bg(\#AFFF00) \
 ^fg(\#262626)^i(Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 1800 checkupdates | wc -l}  \
@@ -114,4 +111,5 @@ ${else}\
  ^i(Scripts/dzen/xbm/bat-16.xbm) ${battery_short} ${battery_time}  \
 ${endif}\
 ${endif}\
+ ${exec dropbox-cli status | head -n1}\
                                                                          ]]
