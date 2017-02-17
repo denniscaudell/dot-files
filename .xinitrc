@@ -18,6 +18,7 @@ fi
 [[ -f /etc/xprofile ]] && source /etc/xprofile
 
 xset +fp ~/.local/share/fonts
+xset s off -dpms
 
 [[ -e /usr/bin/nvida-settings ]] && /usr/bin/nvidia-settings -l
 
@@ -29,7 +30,7 @@ else
     [[ -f ~/.xprofile ]] && source ~/.xprofile
     case "$2" in
         dwm)
-            xrandr --dpi 144
+            # xrandr --dpi 144
             exec ~/Scripts/startdwm &>> "${STARTX_LOG_FILE}"
             ;;
         kde)

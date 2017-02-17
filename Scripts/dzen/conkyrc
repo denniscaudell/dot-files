@@ -40,7 +40,7 @@ conky.config = {
 }
 
 conky.text = [[
-^fn(DejaVu Sans Mono for Powerline:size=12)\
+^fn(DejaVu Sans Mono for Powerline:size=8)\
 ^ca(1, ~/Scripts/dzen/sysinfo-popup.sh)\
 ^fg(\#000000)\
 ^bg(\#00AFFF)\
@@ -68,20 +68,20 @@ $memperc% ${membar 4}  \
 ${acpitemp} °C \
 ${platform applesmc.768 fan 1} RPM \
 ^ca()\
-${if_up enp2s0}\
+${if_up enp8s2}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
-^i(~/Scripts/dzen/xbm/eth-16.xbm) ↑${upspeed enp2s0}   ↓${downspeed enp2s0} \
+^i(~/Scripts/dzen/xbm/eth-16.xbm) ↑${upspeed enp8s2}   ↓${downspeed enp8s2} \
 ${execi 15 ~/Scripts/dzen/net-check.sh} \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
 ^fg(\#262626)^i(Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \
 PKG ${execi 600 checkupdates | wc -l}  \
 AUR ${execi 300 cower -u | wc -l}\
 ${else} \
-${if_up eth1}\
+${if_up eno1}\
 ^fg(\#6C0090)^bg(\#262626)^fg(\#B474C8)^bg(\#6C0090)\
 ^bg(\#B474C8)^fg(\#000000) \
-^i(~/Scripts/dzen/xbm/eth-16.xbm) ↑${upspeed eth1}   ↓${downspeed eth1} \
+^i(~/Scripts/dzen/xbm/eth-16.xbm) ↑${upspeed eno1}   ↓${downspeed eno1} \
 ${execi 15 ~/Scripts/dzen/net-check.sh} \
 ^fg(\#AFFF00)^bg(\#B474C8)^fg(\#000000)^bg(\#AFFF00) \
 ^fg(\#262626)^i(~/Scripts/dzen/xbm/arch-16.xbm)^fg(\#000000) \

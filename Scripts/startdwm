@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+echo "[startdwm] restoring alsa configuration" 
+alsactl restore
+
 echo "[startdwm] loading config file: $HOME/Scripts/dwm/set_dwm_root_name" 
 source "$HOME/Scripts/dwm/set_dwm_root_name"
 

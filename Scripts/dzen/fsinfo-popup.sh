@@ -22,7 +22,7 @@ while [[ $? -eq $exit_dzen ]]; do
     }'
 ) | dzen2 -p -x "420" -y "-48" -w "500" -l "8" -sa 'l' -ta 'c'\
    -title-name 'popup_sysinfo' -e 'onstart=uncollapse;button1=exit:1;button3=exit:3' \
-   -bg \#000000 -fg \#ffffff -fn "DejaVu Sans Mono for Powerline:size=12" -p 30
+   -bg \#000000 -fg \#ffffff -fn "DejaVu Sans Mono for Powerline:size=8" -p 30
 # "onstart=uncollapse" ensures that slave window is visible from start.
 
 exit_dzen=$?

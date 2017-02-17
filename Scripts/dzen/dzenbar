@@ -5,4 +5,4 @@ sed -E -u \
   -e "s/__/░░/g" \
   -e "s/     +/    /g" \
   -e "s/\\\ / /g" | \
-dzen2 -e p2 -y -1 -fn ":size=12" -expand r -p 1
+dzen2 -e p2 -y -1 -fn ":size=8" -expand r -p 1
