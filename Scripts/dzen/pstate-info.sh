@@ -3,11 +3,16 @@
 checkturbo()
 {
 if [[ $(cat /sys/devices/system/cpu/intel_pstate/no_turbo) -eq 1 ]]; then
-  echo "OFF"
+  echo "○"
 else
-  echo "ON"
+  echo "●"
 fi
 }
 
-printf "T:%3s" $(checkturbo)
+checkgovernor()
+{
+  awk '{if ($1 == "powersave") {printf "▂"} else {printf "█"}}' /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+}
+
+printf "%s %s" "$(checkgovernor)" "$(checkturbo)"
 

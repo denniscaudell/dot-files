@@ -1,3 +1,10 @@
+#!/bin/bash
+
+TARGET_MAC="F4:6D:04:AE:EB:DB"
+TARGET_ADDR="192.168.0.101"
+TARGET_USER="daddona"
+BROADCAST_ADDR="192.168.0.255"
+
 function countdown
 {
         local OLD_IFS="${IFS}"
@@ -25,20 +32,22 @@ function countdown
 echo ""
 echo "Turning on Daddona Central Server..."
 
-wol -v -i 192.168.0.255 F4:6D:04:AE:FA:1F
+wol -v -i "$BROADCAST_ADDR" "$TARGET_MAC" 
 
 case "$1" in
-	"now")
-		# do nothing
+	"wait")
+    until ping -c1 -W1 ${TARGET_ADDR} &> /dev/null
+    do
+      echo -n "retrying in"
+      conuntdown "00:00:08"
+    done
+    notify-email "[DDNet] Server is on-line" "Hi!\ndaddona-central-server is now running and on-line.\n\nBye bye!!"
 		;;
-	"nologin")
-		exit
+	"login")
+    echo "Waiting for Server to Boot: "
+    ssh -Y "${TARGET_USER}@${TARGET_ADDR}"
 		;;
-	*)
-    		echo "Waiting for Server to Boot: "
-		countdown "00:00:25"
-		;;
+  *)
+    # ignore    
+    ;;
 esac
-
-echo ""
-ssh -Y daddona@192.168.0.101

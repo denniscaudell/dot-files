@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+USER="${1}"
+IP="$(hamachi list | awk ' NR > 1 {if( $2 == "210-376-482"){print $4}}')"
+
+[[ -z $IP ]] && echo "Server is offline" && exit 1
+
+echo "connecting to ${USER}@${IP}..."
+ssh ${USER}@${IP} ${@:2}
