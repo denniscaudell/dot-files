@@ -1,9 +1,22 @@
 #!/usr/bin/bash
 
+declare -A MACHINES=( ["maj"]="210-376-482" ["gpu"]="206-985-814" )
+
+MSG_ERR_PAR="Missing non-optional parameter!"
+MSG_ERR_OFF="The selected server is offline"
+MSG_HELP="Usage: ssh-ddnet-srv USER MACHINE_ID [COMMAND]"
+
+[[ -z $1 ]] || [[ -z $2 ]] && echo -e "\n$MSG_ERR_PAR\n$MSG_HELP\n" && exit 1
+
 USER="${1}"
-IP="$(hamachi list | awk ' NR > 1 {if( $2 == "210-376-482"){print $4}}')"
+MACHINE_ID="${MACHINES[$2]}"
+MACHINE_NAME="${MACHINES[$2]}"
 
-[[ -z $IP ]] && echo "Server is offline" && exit 1
+IP="$(hamachi list | awk -v mid="${MACHINE_ID}" ' NR > 1 {if( $2 == mid){print $4}}')"
+ID="$(hamachi list | awk -v mid="${MACHINE_ID}" ' NR > 1 {if( $2 == mid){print $3}}')"
 
-echo "connecting to ${USER}@${IP}..."
-ssh ${USER}@${IP} ${@:2}
+[[ -z $IP ]] && echo -e "\n${MSG_ERR_OFF}\n" && exit 1
+
+echo -e "\nconnecting to ${USER} @ ${ID}[${IP}]...\n"
+
+ssh ${USER}@${IP} ${@:3}
