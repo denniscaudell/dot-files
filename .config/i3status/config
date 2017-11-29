@@ -1,0 +1,73 @@
+general {
+        colors = true
+        interval = 5
+}
+
+order += "wireless wlp3s0"
+order += "path_exists VPN"
+order += "battery 0"
+order += "volume master"
+order += "tztime local"
+
+wireless wlp3s0 {
+        format_up = " (%quality at %essid, %bitrate) %ip"
+        format_down = " down"
+}
+
+ethernet enp3s0 {
+        # if you use %speed, i3status requires the cap_net_admin capability
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+battery 0 {
+        format = "%status %percentage %remaining"
+        format_down = "No battery"
+        status_chr = "⚡"
+        status_bat = "  "
+        status_unk = " ? "
+        status_full = "  "
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        format = "VPN "
+        format_down = "VPN "
+        path = "/var/run/logmein-hamachi/ipc.sock"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+        format = "%5min"
+}
+
+cpu_temperature 0 {
+        format = "   %degrees °C"
+        format_above_threshold = "   %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon0/temp1_input"
+}
+
+cpu_usage {
+        format = " %usage"
+}
+
+disk "/" {
+        format = "  %free/%total"
+        prefix_type = binary
+}
+
+disk "/boot" {
+        format = "  %free/%total"
+        prefix_type = binary
+}
+
+volume master {
+        format = "   %volume"
+        format_muted = "   %volume"
+        device = "pulse:1"
+}

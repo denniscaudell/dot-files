@@ -2,21 +2,21 @@
 #
 # ~/.xprofile
 
-if [[ -z "${STARTX_LOG_FILE}" ]]; then
-  export STARTX_LOG_FILE="${HOME}/.xsession-errors.$XDG_VTNR"
+if [[ -z "${_LOG_FILE}" ]]; then
+  export _LOG_FILE="${HOME}/.xsession-errors.$XDG_VTNR"
 fi
 
-echo "[xprofile] setting keyboarm map..." >> "${STARTX_LOG_FILE}"
-/usr/bin/setxbmap it
+echo "[xprofile] setting keyboarm map..." >> "${_LOG_FILE}"
+/usr/bin/setxkbmap it
 /usr/bin/xbindkeys
-echo "[xprofile] loading xresources..." >> "${STARTX_LOG_FILE}"
+echo "[xprofile] loading xresources..." >> "${_LOG_FILE}"
 /usr/bin/xrdb ~/.xresources
 
 #Set deafult browser
 if [ -n "$DISPLAY" ]; then
     export BROWSER=firefox
-    echo "[xprofile] starting ibus-daemon..." >> "${STARTX_LOG_FILE}"
-    /usr/bin/ibus-daemon --xim --daemonize --replace &>> "${STARTX_LOG_FILE}"  &
+    echo "[xprofile] starting ibus-daemon..." >> "${_LOG_FILE}"
+    /usr/bin/ibus-daemon --xim --daemonize --replace &>> "${_LOG_FILE}"  &
 fi
 
 # x releated variables
@@ -25,5 +25,5 @@ export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 
-echo "[xprofile] loading complete" >> ~"${STARTX_LOG_FILE}"
+echo "[xprofile] loading complete" >> ~"${_LOG_FILE}"
 

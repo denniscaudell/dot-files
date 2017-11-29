@@ -81,7 +81,7 @@ Xft.dpi:    144
 URxvt.depth:32
 URxvt*skipBuiltinGlyphs: true
 URxvt.font: xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=15,\
-            xft:AR\ PL\ UMing\ TW\ MBE:size)15,\
+            xft:AR\ PL\ UMing\ TW\ MBE:size=15,\
             -*-xbmicons-medium-r-*-*-*-*-*-*-*-*-*-*
 
 URxvt*scrollTtyOutput: false
