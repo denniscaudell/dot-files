@@ -12,7 +12,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 if command -v sway; then
   sway
 elif command -v i3; then
-  i3
+  startx i3
 else
   echo "No compatible window manager found"
 fi

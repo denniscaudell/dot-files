@@ -27,10 +27,8 @@ else
             xrandr --dpi 144
             exec ~/Scripts/startdwm
             ;;
-        kde)
-            #exec /usr/bin/startkde &>> ~/.xsession-errors
-            echo "KDE support temporary removed!"
-            echo "back to the console..."
+        i3)
+            exec /usr/bin/i3
             ;;
         openbox)
             exec /usr/bin/openbox

@@ -11,5 +11,5 @@ echo '[],'
 
 # Now send blocks with information forever:
 
-conky -c "${HOME}/Scripts/dzen/swaybar-conkyrc" | sed -E -u -e "s/##/██/g" -e "s/#_/█░/g" -e "s/__/░░/g"
+conky -q -c "${HOME}/Scripts/dzen/swaybar-conkyrc" | sed -E -u -e "s/##/██/g" -e "s/#_/█░/g" -e "s/__/░░/g"
 
